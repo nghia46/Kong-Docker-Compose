@@ -3,7 +3,7 @@ version: '3.8'
 services:
   kong-database:
     image: postgres:latest
-    restart: no
+    restart: unless-stopped
     networks:
       - kong-net
     environment:
@@ -24,10 +24,11 @@ services:
       KONG_DATABASE: postgres
       KONG_PG_HOST: kong-database
       KONG_PG_PASSWORD: kongpass
+    restart: on-failure
 
   kong-gateway:
     image: kong:latest
-    restart: no
+    restart: unless-stopped
     networks:
       - kong-net
     environment:
