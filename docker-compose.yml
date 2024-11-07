@@ -51,7 +51,8 @@ services:
     depends_on:
       - kong-migration
       - kong-database
-
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 networks:
   kong-net:
     driver: bridge
